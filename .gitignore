@@ -1,0 +1,26 @@
+# 1. Virtual Environment
+venv/
+
+# 2. Python Cache Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 3. Environment Variables
+.env
+.env.local
+
+# 4. IDE Configurations
+.idea/
+.vscode/
+
+# 5. OS Metadata
+.DS_Store
+Thumbs.db
+
+# 6. Testing & Coverage Cache
+.pytest_cache/
+
+# 7. Log Files
+*.log
