@@ -16,7 +16,8 @@ def index():
         "app": "TechNova",
         "version": "1.0.1",
         "status": "running",
-        "port": PORT
+        "port": PORT,
+        "build": "automated"
     })
 
 # 5. Run the Flask application server if this script is executed directly
