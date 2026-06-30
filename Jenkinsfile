@@ -43,6 +43,28 @@ pipeline {
             }
         }
 
+        stage('Deploy to EC2') {
+            steps {
+                withCredentials([
+                    sshUserPrivateKey(
+                        credentialsId: 'ec2-ssh-key',
+                        keyFileVariable: 'SSH_KEY',
+                        usernameVariable: 'SSH_USER'
+                    ),
+                    string(credentialsId: 'ec2-public-ip', variable: 'EC2_IP')
+                ]) {
+                    sh """
+                        ssh -i \$SSH_KEY -o StrictHostKeyChecking=no \$SSH_USER@\$EC2_IP '
+                            docker pull ${IMAGE_NAME}:latest &&
+                            docker stop technova-container || true &&
+                            docker rm technova-container || true &&
+                            docker run -d --name technova-container -p 5000:5000 --restart unless-stopped ${IMAGE_NAME}:latest
+                        '
+                    """
+                }
+            }
+        }
+
     }
 
     post {
