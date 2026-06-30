@@ -14,7 +14,7 @@ PORT = int(os.environ.get("PORT", 5000))
 def index():
     return jsonify({
         "app": "TechNova",
-        "version": "1.0.2",
+        "version": "1.0.3",
         "status": "running",
         "port": PORT,
         "build": "automated"
