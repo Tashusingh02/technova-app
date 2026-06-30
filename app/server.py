@@ -17,7 +17,8 @@ def index():
         "version": "1.0.3",
         "status": "running",
         "port": PORT,
-        "build": "automated"
+        "build": "automated",
+        "verified_at": "2026-06-30"
     })
 
 # 5. Run the Flask application server if this script is executed directly

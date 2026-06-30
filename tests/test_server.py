@@ -31,6 +31,7 @@ class TestTechNovaApp(unittest.TestCase):
         self.assertIn("app", data)
         self.assertIn("version", data)
         self.assertIn("status", data)
+        self.assertIn("verified_at", data)
 
 # 5. Run the tests using unittest's main runner with verbosity set to 2
 if __name__ == "__main__":
