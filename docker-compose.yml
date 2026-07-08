@@ -13,3 +13,9 @@ services:
     volumes:
       - ./app:/app/app
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+

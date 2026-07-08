@@ -23,4 +23,4 @@ def index():
 
 # 5. Run the Flask application server if this script is executed directly
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=PORT)
+    app.run(host="0.0.0.0", port=PORT, debug=False)

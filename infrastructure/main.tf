@@ -49,6 +49,8 @@ resource "aws_vpc" "technova_vpc" {
   }
 }
 
+# INTENTIONAL: public IP required for direct SSH access by Jenkins
+# In production this would be a private subnet behind an ALB
 resource "aws_subnet" "technova_subnet" {
   vpc_id                  = aws_vpc.technova_vpc.id
   cidr_block              = "10.0.1.0/24"
@@ -95,11 +97,11 @@ resource "aws_security_group" "technova_sg" {
 
   # Inbound Rule: SSH port 22 for administration
   ingress {
-    description = "Allow SSH from anywhere"
+    description = "Allow SSH from my IP"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["104.28.158.78/32"]
   }
 
   # Inbound Rule: Flask Application Port 5000
@@ -141,6 +143,8 @@ resource "aws_instance" "technova_server" {
   instance_type               = "t2.micro" # FREE TIER ONLY — DO NOT CHANGE
   subnet_id                   = aws_subnet.technova_subnet.id
   vpc_security_group_ids      = [aws_security_group.technova_sg.id]
+  # INTENTIONAL: public IP required — no load balancer in this setup
+  # Mitigated by: security group restricts to ports 22 and 5000 only
   associate_public_ip_address = true
   key_name                    = aws_key_pair.technova_key.key_name
 
